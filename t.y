@@ -12,8 +12,8 @@
 %token RESERVADA
 %token ATRIBUICAO
 %token RELACIONAL
-%token IN OUT
-%token INFO
+%token ENTRADA
+%token SAIDA
 %token SE SENAO
 %token INICIOBLOCO FIMBLOCO
 %token REPETICAO
@@ -82,18 +82,18 @@ OPERATOR
     ;
 
 INOUT
-    : IN EXPRESSAO
-    | IN
-    | OUT START
-    | OUT
+    : ENTRADA EXPRESSAO
+    | ENTRADA
+    | SAIDA START
+    | SAIDA
     ;
 
 OUT
-    : OUT INFO PONTOVIRGULA
+    : ENTRADA INFO PONTOVIRGULA
     ;
 
 IN
-    : IN INFO PONTOVIRGULA
+    : ENTRADA INFO PONTOVIRGULA
     ;
 
 INFO
