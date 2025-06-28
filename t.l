@@ -1,54 +1,55 @@
 %{
-    include <stdio.h>
-    #include "t.tab.h"
-
+#include <stdio.h>
+#include "t.tab.h"
 %}
 
-***** Expressões Regulares *****
-
-dígito        [0-9]
-letra         [a-zA-Z]
-
-begin         A
-end           UU
-pontovirgula  AUU
-iniciobloco   Au
-fimbloco      AU
-doispontos    Auu
-
-variavel      [letra]+([dígito]*[letra]*)*
-reservada     A((uA(u|U))|(UAu))
-
-inteiro       ([AuuAuAU])?[dígito]+
-real          ([AuuAuAU])?[dígito]+\.[dígito]+
-
-caractere     \'(letra|dígito)+\'
-
-relacional    A((uA(u|U)A(u|U))|(UAuAu))
-
-atribuicao    AuAuAu
-
-se            AuuAUU
-senao         AUUAuu
-entrada       AuAuu
-saida         AUAuu
-
-logico        A((uUAU(u|U))|(UuAuU))
-
-soma          AuuAuAu
-sub           AuuAuAU
-mult          AuuAUAu
-div           AuuAUAU
-mod           AuuAuuAu
-
-while         AUUAUU
+DIGITO        [0-9]
+LETRA         [a-zA-Z]
 
 %%
-***** Tokens *****
 
+A                              { return BEGIN; }
+UU                             { return END; }
+AUU                            { return PONTOVIRGULA; }
+Au                             { return INICIOBLOCO; }
+AU                             { return FIMBLOCO; }
+Auu                            { return DOISPONTOS; }
 
+{LETRA}+({DIGITO}*{LETRA}*)*   { return VARIAVEL; }
+A((uA(u|U))|(UAu))             { return RESERVADA; }
+
+([AuuAuAU])?{DIGITO}+          { return INTEIRO; }
+([AuuAuAU])?{DIGITO}+\.[DIGITO]+ { return REAL; }
+
+\'({LETRA}|{DIGITO})+\'        { return CARACTERE; }
+
+A((uA(u|U)A(u|U))|(UAuAu))     { return RELACIONAL; }
+AuAuAu                         { return ATRIBUICAO; }
+
+AuuAUU                         { return SE; }
+AUUAuu                         { return SENAO; }
+AuAuu                          { return ENTRADA; }
+AUAuu                          { return SAIDA; }
+
+A((uUAU(u|U))|(UuAuU))         { return LOGICO; }
+
+AuuAuAu                        { return SOMA; }
+AuuAuAU                        { return SUB; }
+AuuAUAu                        { return MULT; }
+AuuAUAU                        { return DIV; }
+AuuAuuAu                       { return MOD; }
+
+AUUAUU                         { return WHILE; }
+
+[ \t\n]+                       { /* ignora espaços em branco */ }
+.                              { printf("Caractere não reconhecido: %s\n", yytext); }
 
 %%
-***** Funções *****
+
+int yywrap(void) { return 1; }
+
+
+
+
 
 
