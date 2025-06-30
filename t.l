@@ -1,55 +1,46 @@
 %{
+#include "y.tab.h"
 #include <stdio.h>
-#include "t.tab.h"
+#include <stdlib.h>
 %}
 
-DIGITO        [0-9]
-LETRA         [a-zA-Z]
+digit      [0-9]
+letra      [a-zA-Z]
 
 %%
 
-A                              { return BEGIN; }
-UU                             { return END; }
-AUU                            { return PONTOVIRGULA; }
-Au                             { return INICIOBLOCO; }
-AU                             { return FIMBLOCO; }
-Auu                            { return DOISPONTOS; }
+"programa"          { return BEGINPROGRAMA; }
+"fim"               { return ENDPROGRAMA; }
+";"                 { return PONTOVIRGULA; }
 
-{LETRA}({LETRA}|{DIGITO})*     { return VARIAVEL; }
-A(uA(u|U)|UAu)                 { return RESERVADA; }
+"se"                { return SE; }
+"senao"             { return SENAO; }
 
-(Auu|Au|AU)?{DIGITO}+          { return INTEIRO; }
-(Auu|Au|AU)?{DIGITO}+\.[DIGITO]+ { return REAL; }
+"in"                { return IN; }
+"out"               { return OUT; }
 
-\'({LETRA}|{DIGITO})+\'        { return CARACTERE; }
+"="                 { return ATRIBUICAO; }
+"=="|"!="|">"|"<"   { return RELACIONAL; }
 
-A(uA(u|U)A(u|U)|UAuAu)         { return RELACIONAL; }
-AuAuAu                         { return ATRIBUICAO; }
+"+"                 { return SOMA; }
+"-"                 { return SUB; }
+"*"                 { return MULT; }
 
-AuuAUU                         { return SE; }
-AUUAuu                         { return SENAO; }
-AuAuu                          { return ENTRADA; }
-AUAuu                          { return SAIDA; }
+"e"|"ou"            { return LOGICO; }
 
-A(uUAU(u|U)|UuAuU)             { return LOGICO; }
+{digit}+            { yylval.inteiro = atoi(yytext); return INTEIRO; }
+{digit}+"."{digit}+ { yylval.real = atof(yytext); return REAL; }
 
-AuuAuAu                        { return SOMA; }
-AuuAuAU                        { return SUB; }
-AuuAUAu                        { return MULT; }
-AuuAUAU                        { return DIV; }
-AuuAuuAu                       { return MOD; }
+\'[a-zA-Z0-9]\'      { yylval.caractere = yytext[1]; return CARACTERE; }
 
-AUUAUU                         { return REPETIR; }
+{letra}({letra}|{digit})*   { yylval.ident = strdup(yytext); return ID; }
 
-[ \t\n]+                       { /* ignora espaços em branco */ }
-.                              { printf("Caractere não reconhecido: %s\n", yytext); }
+[ \t\n\r]+          { /* ignorar espaços */ }
+
+.                   { printf("Caractere inválido: %s\n", yytext); exit(1); }
 
 %%
 
-int yywrap(void) { return 1; }
-
-
-
-
-
-
+int yywrap() {
+    return 1;
+}

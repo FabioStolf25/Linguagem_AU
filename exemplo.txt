@@ -1,0 +1,14 @@
+programa
+    int x;
+    float y;
+    char c;
+
+    x = 10;
+    y = 3.14;
+    c = 'a';
+
+    se x > 5
+        out x;
+    senao
+        out y;
+fim

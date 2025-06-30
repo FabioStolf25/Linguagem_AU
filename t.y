@@ -1,177 +1,90 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+void yyerror(const char *s);
+int yylex(void);
+
 %}
 
-%token BEGINPROGRAMA ENDPROGRAMA
-%token INTEIRO REAL
-%token SOMA SUB MULT DIV MOD
-%token PONTOVIRGULA
-%token CARACTERE
-%token VARIAVEL
-%token RESERVADA
-%token ATRIBUICAO
-%token RELACIONAL
-%token ENTRADA
-%token SAIDA
-%token SE SENAO
-%token INICIOBLOCO FIMBLOCO
-%token REPETICAO
-%token LOGICO
-
-
-%%
-
-INICIO
-    : BEGINPROGRAMA EXPRESSAO
-    | BEGINPROGRAMA ENDPROGRAMA
-    ;
-
-EXPRESSAO
-    : RESULTADO
-    | INOUT
-    | NOMEVAR
-    | ATRIBUIR
-    | RELACIONAR
-    | CONDICAO
-    | REPETIR
-    | DESVIOCONDICAO
-    | LOGIC
-    ;
-
-RESULTADO
-    : EXP PONTOVIRGULA EXPRESSAO
-    | EXP_REAL EXP_REAL PONTOVIRGULA EXPRESSAO
-    | EXP_REAL EXP_REAL PONTOVIRGULA
-    | EXP_INT EXP_INT PONTOVIRGULA EXPRESSAO
-    | EXP_INT EXP_INT PONTOVIRGULA
-    | EXP PONTOVIRGULA
-    ;
-
-EXP
-    : EXP_INT
-    | EXP_REAL
-    ;
-
-EXP_INT
-    : EXP_INT
-    | VAL_INT OPERATOR
-    | OPERATOR VAL_INT
-    ;
-
-EXP_REAL
-    : EXP_REAL
-    | VAL_REAL OPERATOR VAL_REAL
-    | OPERATOR VAL_REAL
-    ;
-
-VAL_INT
-    : INTEIRO
-    ;
-
-VAL_REAL
-    : REAL
-    ;
-
-OPERATOR
-    : SOMA
-    | SUB
-    | MULT
-    | DIV
-    | MOD
-    ;
-
-INOUT
-    : ENTRADA EXPRESSAO
-    | ENTRADA
-    | SAIDA START
-    | SAIDA
-    ;
-
-OUT
-    : ENTRADA INFO PONTOVIRGULA
-    ;
-
-IN
-    : ENTRADA INFO PONTOVIRGULA
-    ;
-
-INFO
-    : CARACTERE
-    | INTEIRO
-    | REAL
-    | VARIAVEL
-    ;
-
-NOMEVAR
-    : RESERVADA VARIAVEL PONTOVIRGULA
-    | RESERVADA VARIAVEL PONTOVIRGULA EXPRESSAO
-    ;
-
-ATRIBUIR
-    : VARIAVEL ATRIBUICAO INFO PONTOVIRGULA
-    | VARIAVEL ATRIBUICAO INFO PONTOVIRGULA EXPRESSAO
-    ;
-
-RELACIONAR
-    : VARIAVEL RELACIONAL VARIAVEL
-    | VARIAVEL RELACIONAL VARIAVEL EXPRESSAO
-    | INTEIRO RELACIONAL VARIAVEL
-    | REAL RELACIONAL VARIAVEL
-    | CARACTERE RELACIONAL VARIAVEL
-    | INTEIRO RELACIONAL VARIAVEL EXPRESSAO
-    | REAL RELACIONAL VARIAVEL EXPRESSAO
-    | CARACTERE RELACIONAL VARIAVEL EXPRESSAO
-    | VARIAVEL RELACIONAL INTEIRO
-    | VARIAVEL RELACIONAL REAL
-    | VARIAVEL RELACIONAL CARACTERE
-    | VARIAVEL RELACIONAL INTEIRO EXPRESSAO
-    | VARIAVEL RELACIONAL REAL EXPRESSAO
-    | VARIAVEL RELACIONAL CARACTERE EXPRESSAO
-    ;
-
-CONDICAO
-    : SE RELACIONAR INICIOBLOCO EXPRESSAO FIMBLOCO EXPRESSAO
-    | SE RELACIONAR INICIOBLOCO EXPRESSAO FIMBLOCO
-    | SE LOGIC INICIOBLOCO EXPRESSAO FIMBLOCO
-    | SE LOGIC INICIOBLOCO EXPRESSAO FIMBLOCO EXPRESSAO
-    ;
-
-DESVIOCONDICAO
-    : SENAO INICIOBLOCO EXPRESSAO FIMBLOCO
-    | SENAO INICIOBLOCO EXPRESSAO FIMBLOCO EXPRESSAO
-    | SENAO CONDICAO
-    ;
-
-REPETIR
-    : REPETICAO RELACIONAR INICIOBLOCO EXPRESSAO FIMBLOCO EXPRESSAO
-    | REPETICAO RELACIONAR INICIOBLOCO EXPRESSAO FIMBLOCO
-    ;
-
-LOGIC
-    : INTEIRO LOGICO INTEIRO
-    | INTEIRO LOGICO INTEIRO EXPRESSAO
-    | REAL LOGICO REAL
-    | REAL LOGICO REAL EXPRESSAO
-    | INTEIRO LOGICO VARIAVEL
-    | INTEIRO LOGICO VARIAVEL EXPRESSAO
-    | REAL LOGICO VARIAVEL
-    | REAL LOGICO VARIAVEL EXPRESSAO
-    | VARIAVEL LOGICO INTEIRO
-    | VARIAVEL LOGICO INTEIRO EXPRESSAO
-    | VARIAVEL LOGICO REAL
-    | VARIAVEL LOGICO REAL EXPRESSAO
-    | VARIAVEL LOGICO VARIAVEL
-    | VARIAVEL LOGICO VARIAVEL EXPRESSAO
-    ;
-
-%%
-
-int main(void) {
-    return yyparse();
+%union {
+    int inteiro;
+    float real;
+    char caractere;
+    char* ident;
 }
 
-int yyerror(char *s) {
-    fprintf(stderr, "%s\n", s);
+%token BEGINPROGRAMA ENDPROGRAMA PONTOVIRGULA
+%token SE SENAO IN OUT
+%token RELACIONAL SOMA SUB MULT LOGICO ATRIBUICAO
+%token <inteiro> INTEIRO
+%token <real> REAL
+%token <caractere> CARACTERE
+%token <ident> ID
+
+%type <inteiro> expressao
+
+%%
+
+programa:
+    BEGINPROGRAMA comandos ENDPROGRAMA
+;
+
+comandos:
+    comandos comando
+    | comando
+;
+
+comando:
+    declaracao PONTOVIRGULA
+    | atribuicao PONTOVIRGULA
+    | condicional
+    | entrada PONTOVIRGULA
+    | saida PONTOVIRGULA
+;
+
+declaracao:
+    "int" ID
+    | "float" ID
+    | "char" ID
+;
+
+atribuicao:
+    ID ATRIBUICAO expressao
+;
+
+entrada:
+    IN ID
+;
+
+saida:
+    OUT expressao
+;
+
+condicional:
+    SE expressao comando
+    | SE expressao comando SENAO comando
+;
+
+expressao:
+    expressao SOMA expressao
+    | expressao SUB expressao
+    | expressao MULT expressao
+    | expressao RELACIONAL expressao
+    | INTEIRO
+    | REAL
+    | ID
+;
+
+%%
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Erro: %s\n", s);
+}
+
+int main(void) {
+    printf("Iniciando o parser...\n");
+    yyparse();
     return 0;
 }
