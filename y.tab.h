@@ -42,40 +42,72 @@
      BEGINPROGRAMA = 258,
      ENDPROGRAMA = 259,
      PONTOVIRGULA = 260,
-     SE = 261,
-     SENAO = 262,
-     IN = 263,
-     OUT = 264,
-     RELACIONAL = 265,
-     SOMA = 266,
-     SUB = 267,
-     MULT = 268,
-     LOGICO = 269,
-     ATRIBUICAO = 270,
-     INTEIRO = 271,
-     REAL = 272,
-     CARACTERE = 273,
-     ID = 274
+     INICIOBLOCO = 261,
+     FIMBLOCO = 262,
+     REPETICAO = 263,
+     SE = 264,
+     SENAO = 265,
+     ENTRADA = 266,
+     SAIDA = 267,
+     DOISPONTOS = 268,
+     IGUAL = 269,
+     MENOR = 270,
+     MAIOR = 271,
+     MENOR_IGUAL = 272,
+     MAIOR_IGUAL = 273,
+     OU = 274,
+     NAO = 275,
+     E = 276,
+     ATRIBUICAO = 277,
+     SOMA = 278,
+     SUB = 279,
+     MULT = 280,
+     DIV = 281,
+     MOD = 282,
+     TIPO_INT = 283,
+     TIPO_REAL = 284,
+     TIPO_CHAR = 285,
+     INTEIRO = 286,
+     REAL = 287,
+     CARACTERE = 288,
+     VARIAVEL = 289,
+     UNEGATIVO = 290
    };
 #endif
 /* Tokens.  */
 #define BEGINPROGRAMA 258
 #define ENDPROGRAMA 259
 #define PONTOVIRGULA 260
-#define SE 261
-#define SENAO 262
-#define IN 263
-#define OUT 264
-#define RELACIONAL 265
-#define SOMA 266
-#define SUB 267
-#define MULT 268
-#define LOGICO 269
-#define ATRIBUICAO 270
-#define INTEIRO 271
-#define REAL 272
-#define CARACTERE 273
-#define ID 274
+#define INICIOBLOCO 261
+#define FIMBLOCO 262
+#define REPETICAO 263
+#define SE 264
+#define SENAO 265
+#define ENTRADA 266
+#define SAIDA 267
+#define DOISPONTOS 268
+#define IGUAL 269
+#define MENOR 270
+#define MAIOR 271
+#define MENOR_IGUAL 272
+#define MAIOR_IGUAL 273
+#define OU 274
+#define NAO 275
+#define E 276
+#define ATRIBUICAO 277
+#define SOMA 278
+#define SUB 279
+#define MULT 280
+#define DIV 281
+#define MOD 282
+#define TIPO_INT 283
+#define TIPO_REAL 284
+#define TIPO_CHAR 285
+#define INTEIRO 286
+#define REAL 287
+#define CARACTERE 288
+#define VARIAVEL 289
+#define UNEGATIVO 290
 
 
 
@@ -85,17 +117,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 11 "t.y"
+#line 45 "au.y"
 
-    int inteiro;
-    float real;
-    char caractere;
-    char* ident;
+    struct no* no_ptr;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 99 "y.tab.h"
+#line 128 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -1,14 +1,26 @@
-programa
-    int x;
-    float y;
-    char c;
+A
+AuAu contador AUU
+AuAu soma AUU
 
-    x = 10;
-    y = 3.14;
-    c = 'a';
+contador Auuu 0 AUU
+soma Auuu 0 AUU
 
-    se x > 5
-        out x;
-    senao
-        out y;
-fim
+AUAuu 'I' AUU 
+
+AUUAUU contador AuAUAU 5 Auu
+Au
+    soma Auuu soma AuuAuAu contador AUU
+    
+    contador Auuu contador AuuAuAu 1 AUU
+AU
+
+AUAuu soma AUU
+
+AuuAUU soma AuAUAU 10 Auu
+Au
+    AUAuu 'S' AUU
+AU
+AUUAuu
+Au
+    AUAuu 'N' AUU
+AU
