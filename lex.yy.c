@@ -646,162 +646,162 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 20 "au.l"
-{ return BEGINPROGRAMA; }
+{ printf("BEGINPROGRAMA "); return BEGINPROGRAMA; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 21 "au.l"
-{ return ENDPROGRAMA; }
+{ printf("ENDPROGRAMA "); return ENDPROGRAMA; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 22 "au.l"
-{ return PONTOVIRGULA; }
+{ printf("PONTOVIRGULA "); return PONTOVIRGULA; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 24 "au.l"
-{ return INICIOBLOCO; }
+{ printf("INICIOBLOCO "); return INICIOBLOCO; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 25 "au.l"
-{ return FIMBLOCO; }
+{ printf("FIMBLOCO "); return FIMBLOCO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 26 "au.l"
-{ return DOISPONTOS; }
+{ printf("DOISPONTOS "); return DOISPONTOS; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 28 "au.l"
-{ return REPETICAO; }
+{ printf("REPETICAO "); return REPETICAO; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 29 "au.l"
-{ return SE; }
+{ printf("SE "); return SE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 30 "au.l"
-{ return SENAO; }
+{ printf("SENAO "); return SENAO; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 33 "au.l"
-{ return ENTRADA; }
+{ printf("ENTRADA "); return ENTRADA; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 34 "au.l"
-{ return SAIDA; }
+{ printf("SAIDA "); return SAIDA; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 36 "au.l"
-{ return ATRIBUICAO; }
+{ printf("ATRIBUICAO "); return ATRIBUICAO; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 38 "au.l"
-{ return TIPO_INT; }
+{ printf("TIPO_INT "); return TIPO_INT; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 39 "au.l"
-{ return TIPO_REAL; }
+{ printf("TIPO_REAL "); return TIPO_REAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 40 "au.l"
-{ return TIPO_CHAR; }
+{ printf("TIPO_CHAR "); return TIPO_CHAR; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 42 "au.l"
-{ return IGUAL; }
+{ printf("IGUAL "); return IGUAL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 43 "au.l"
-{ return MENOR; }
+{ printf("MENOR "); return MENOR; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 44 "au.l"
-{ return MAIOR; }
+{ printf("MAIOR "); return MAIOR; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 45 "au.l"
-{ return MENOR_IGUAL; }
+{ printf("MENOR_IGUAL "); return MENOR_IGUAL; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 46 "au.l"
-{ return MAIOR_IGUAL; }
+{ printf("MAIOR_IGUAL "); return MAIOR_IGUAL; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 48 "au.l"
-{ return SOMA; }
+{ printf("SOMA "); return SOMA; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 49 "au.l"
-{ return SUB; }
+{ printf("SUB "); return SUB; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 50 "au.l"
-{ return MULT; }
+{ printf("MULT "); return MULT; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 51 "au.l"
-{ return DIV; }
+{ printf("DIV "); return DIV; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 52 "au.l"
-{ return MOD; }
+{ printf("MOD "); return MOD; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 54 "au.l"
-{ return OU; }
+{ printf("OU "); return OU; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 55 "au.l"
-{ return NAO; }  
+{ printf("NAO "); return NAO; }  
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 56 "au.l"
-{return E; }
+{ printf("E "); return E; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 58 "au.l"
-{ yylval.no_ptr = cria_folha_int(atoi(yytext)); return INTEIRO; }
+{ yylval.no_ptr = cria_folha_int(atoi(yytext)); printf("INTEIRO "); return INTEIRO; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 59 "au.l"
-{ yylval.no_ptr = cria_folha_real(atof(yytext)); return REAL; }
+{ yylval.no_ptr = cria_folha_real(atof(yytext)); printf("REAL "); return REAL; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 60 "au.l"
-{ yylval.no_ptr = cria_folha_char(yytext[1]); return CARACTERE; }
+{ yylval.no_ptr = cria_folha_char(yytext[1]); printf("CARACTERE"); return CARACTERE; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 61 "au.l"
-{ yylval.no_ptr = cria_folha_var(strdup(yytext)); return VARIAVEL; }
+{ yylval.no_ptr = cria_folha_var(strdup(yytext)); printf("VARIAVEL "); return VARIAVEL; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP

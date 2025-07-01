@@ -117,13 +117,11 @@ comando_io:
 comando_se:
       SE exp DOISPONTOS comando_bloco
       {
-          // $2 é exp, $4 é comando_bloco
           no* corpo = cria_no_op(TIPO_CORPO_SE, $4, NULL);
           $$ = cria_no_op(SE, $2, corpo);
       }
     | SE exp DOISPONTOS comando_bloco SENAO comando_bloco
       {
-          // $2 é exp, $4 é o bloco 'then', $6 é o bloco 'else'
           no* corpo = cria_no_op(TIPO_CORPO_SE, $4, $6);
           $$ = cria_no_op(SE, $2, corpo);
       }

@@ -540,9 +540,9 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    80,    80,    84,    85,    89,    90,    91,    92,    93,
-      94,    98,   102,   103,   104,   108,   112,   113,   118,   124,
-     133,   137,   138,   139,   140,   141,   142,   143,   144,   145,
-     146,   147,   148,   149,   150,   151,   152,   153,   154,   155
+      94,    98,   102,   103,   104,   108,   112,   113,   118,   123,
+     131,   135,   136,   137,   138,   139,   140,   141,   142,   143,
+     144,   145,   146,   147,   148,   149,   150,   151,   152,   153
 };
 #endif
 
@@ -1627,7 +1627,6 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 119 "au.y"
     {
-          // $2 é exp, $4 é comando_bloco
           no* corpo = cria_no_op(TIPO_CORPO_SE, (yyvsp[(4) - (4)].no_ptr), NULL);
           (yyval.no_ptr) = cria_no_op(SE, (yyvsp[(2) - (4)].no_ptr), corpo);
       }
@@ -1636,9 +1635,8 @@ yyreduce:
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 125 "au.y"
+#line 124 "au.y"
     {
-          // $2 é exp, $4 é o bloco 'then', $6 é o bloco 'else'
           no* corpo = cria_no_op(TIPO_CORPO_SE, (yyvsp[(4) - (6)].no_ptr), (yyvsp[(6) - (6)].no_ptr));
           (yyval.no_ptr) = cria_no_op(SE, (yyvsp[(2) - (6)].no_ptr), corpo);
       }
@@ -1647,147 +1645,147 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 133 "au.y"
+#line 131 "au.y"
     { (yyval.no_ptr) = cria_no_op(REPETICAO, (yyvsp[(2) - (4)].no_ptr), (yyvsp[(4) - (4)].no_ptr)); }
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 137 "au.y"
+#line 135 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 138 "au.y"
+#line 136 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 139 "au.y"
+#line 137 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 140 "au.y"
+#line 138 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 141 "au.y"
+#line 139 "au.y"
     { (yyval.no_ptr) = cria_no_op(SOMA, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 142 "au.y"
+#line 140 "au.y"
     { (yyval.no_ptr) = cria_no_op(SUB, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 143 "au.y"
+#line 141 "au.y"
     { (yyval.no_ptr) = cria_no_op(MULT, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 144 "au.y"
+#line 142 "au.y"
     { (yyval.no_ptr) = cria_no_op(DIV, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 145 "au.y"
+#line 143 "au.y"
     { (yyval.no_ptr) = cria_no_op(MOD, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 146 "au.y"
+#line 144 "au.y"
     { (yyval.no_ptr) = cria_no_op(IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 147 "au.y"
+#line 145 "au.y"
     { (yyval.no_ptr) = cria_no_op(MENOR, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 148 "au.y"
+#line 146 "au.y"
     { (yyval.no_ptr) = cria_no_op(MAIOR, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 149 "au.y"
+#line 147 "au.y"
     { (yyval.no_ptr) = cria_no_op(MENOR_IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 150 "au.y"
+#line 148 "au.y"
     { (yyval.no_ptr) = cria_no_op(MAIOR_IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 151 "au.y"
+#line 149 "au.y"
     { (yyval.no_ptr) = cria_no_op(E, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 152 "au.y"
+#line 150 "au.y"
     { (yyval.no_ptr) = cria_no_op(OU, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 153 "au.y"
+#line 151 "au.y"
     { (yyval.no_ptr) = cria_no_unario(NAO, (yyvsp[(2) - (2)].no_ptr)); }
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 154 "au.y"
+#line 152 "au.y"
     { (yyval.no_ptr) = cria_no_unario(UNEGATIVO, (yyvsp[(2) - (2)].no_ptr)); }
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 155 "au.y"
+#line 153 "au.y"
     { (yyval.no_ptr) = (yyvsp[(2) - (3)].no_ptr); }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1791 "y.tab.c"
+#line 1789 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1999,7 +1997,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 158 "au.y"
+#line 156 "au.y"
 
 
 
