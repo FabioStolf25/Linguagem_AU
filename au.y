@@ -1,4 +1,3 @@
-// au.y
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -128,7 +127,6 @@ exp:
 %%
 
 void yyerror(const char *s) {
-    // Adicionado yylineno para dar mais detalhes do erro
     fprintf(stderr, "Erro na linha %d: %s\n", yylineno, s);
 }
 
@@ -227,12 +225,10 @@ void executa_arvore(struct No* n) {
                     case CARACTERE: {
                         char val_char = 0;
                         scanf(" %c", &val_char);
-                        s->valor = val_char;
+                        s->valor = (char)val_char;
                         break;
                     }
                     case VARIAVEL: {
-                        // Tenta inferir o tipo pelo valor atual (se já foi atribuído)
-                        // Por padrão, lê como double
                         double val = 0;
                         scanf("%lf", &val);
                         s->valor = val;
@@ -299,11 +295,13 @@ void insere_simbolo(const char* nome) {
         char msg[256];
         sprintf(msg, "Variavel '%s' ja declarada.", nome);
         yyerror(msg);
-        return; // Apenas retorna, não encerra o programa
+        return;
     }
     struct Simbolo* s = (struct Simbolo*) malloc(sizeof(struct Simbolo));
-    strncpy(s->nome, nome, 255); s->nome[255] = '\0';
-    s->valor = 0; s->proximo = tabela_simbolos;
+    strncpy(s->nome, nome, 255);
+    s->nome[255] = '\0';
+    s->valor = 0;
+    s->proximo = tabela_simbolos;
     tabela_simbolos = s;
 }
 

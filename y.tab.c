@@ -2098,7 +2098,7 @@ void executa_arvore(struct No* n) {
                     case CARACTERE: {
                         char val_char = 0;
                         scanf(" %c", &val_char);
-                        s->valor = val_char;
+                        (char)s->valor = val_char;
                         break;
                     }
                     case VARIAVEL: {
