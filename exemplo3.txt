@@ -1,0 +1,26 @@
+A
+
+    AuAu t1 AUU
+    AuAu t2 AUU
+    AuAu proximotermo AUU
+    AuAu contador AUU
+    AuAu limite AUU
+
+    t1 Auuu 0 AUU
+    t2 Auuu 1 AUU
+    limite Auuu 10 AUU
+    contador Auuu 1 AUU
+
+    AUUAUU contador AuAUAU limite Auu
+    Au
+        AUAuu t1 AUU
+
+        proximotermo Auuu t1 AuuAuAu t2 AUU
+
+        t1 Auuu t2 AUU
+        t2 Auuu proximotermo AUU
+
+        contador Auuu contador AuuAuAu 1 AUU
+    AU
+
+UU

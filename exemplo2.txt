@@ -1,0 +1,20 @@
+A
+    AuAu valorInt AUU
+    AuAU valorReal AUU
+    AUAu valorChar AUU
+
+    AUAuu 'I' AUU
+    AuAuu valorInt AUU
+    AUAuu valorInt AUU
+
+    AUAuu 'R' AUU
+    AuAuu valorReal AUU
+    AUAuu valorReal AUU
+
+    AUAuu 'C' AUU
+    AuAuu valorChar AUU
+    AUAuu valorChar AUU
+
+    AUAuu valorInt AuuAuAu 100 AUU
+
+UU

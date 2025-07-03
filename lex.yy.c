@@ -262,11 +262,15 @@ static void yy_flex_free YY_PROTO(( void * ));
 #define YY_AT_BOL() (yy_current_buffer->yy_at_bol)
 
 
+#define YY_USES_REJECT
+
 #define yywrap() 1
 #define YY_SKIP_YYWRAP
 typedef unsigned char YY_CHAR;
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
 typedef int yy_state_type;
+extern int yylineno;
+int yylineno = 1;
 extern char *yytext;
 #define yytext_ptr yytext
 
@@ -287,15 +291,31 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 
 #define YY_NUM_RULES 35
 #define YY_END_OF_BUFFER 36
-static yyconst short int yy_accept[68] =
+static yyconst short int yy_acclist[104] =
     {   0,
-        0,    0,   36,   34,   33,   33,   34,   29,    1,   32,
-       32,   33,    0,    0,   29,   32,    5,    4,    2,   31,
-       30,   32,    3,   32,   32,   32,    6,   15,   32,   32,
-       14,   13,   32,   32,   12,   32,   11,   32,   32,   32,
-       32,   32,   10,   32,   32,   32,   20,    7,    9,   28,
-       19,   18,   17,   16,   27,   26,   32,    8,   32,   32,
-       24,   23,   22,   21,   32,   25,    0
+       36,   34,   35,   33,   34,   35,   33,   35,   34,   35,
+       29,   34,   35,    1,   32,   34,   35,   32,   34,   35,
+       32,   34,   35,   33,   29,   32,    5,   32,    4,   32,
+        2,   32,   31,   30,   32,    3,   32,   32,   32,   32,
+        6,   32,   15,   32,   32,   32,   14,   32,   13,   32,
+       32,   32,   12,   32,   32,   11,   32,   32,   32,   32,
+       32,   32,   10,   32,   32,   32,   32,   20,   32,    7,
+       32,    9,   32,   28,   32,   19,   32,   18,   32,   17,
+       32,   16,   32,   27,   32,   26,   32,   32,    8,   32,
+       32,   32,   24,   32,   23,   32,   22,   32,   21,   32,
+
+       32,   25,   32
+    } ;
+
+static yyconst short int yy_accept[69] =
+    {   0,
+        1,    1,    1,    2,    4,    7,    9,   11,   14,   18,
+       21,   24,   25,   25,   25,   26,   27,   29,   31,   33,
+       34,   35,   36,   38,   39,   40,   41,   43,   45,   46,
+       47,   49,   51,   52,   53,   55,   56,   58,   59,   60,
+       61,   62,   63,   65,   66,   67,   68,   70,   72,   74,
+       76,   78,   80,   82,   84,   86,   88,   89,   91,   92,
+       93,   95,   97,   99,  101,  102,  104,  104
     } ;
 
 static yyconst int yy_ec[256] =
@@ -383,13 +403,16 @@ static yyconst short int yy_chk[87] =
        67,   67,   67,   67,   67,   67
     } ;
 
-static yy_state_type yy_last_accepting_state;
-static char *yy_last_accepting_cpos;
-
-/* The intent behind this definition is that it'll catch
- * any uses of REJECT which flex missed.
- */
-#define REJECT reject_used_but_not_detected
+static yy_state_type yy_state_buf[YY_BUF_SIZE + 2], *yy_state_ptr;
+static char *yy_full_match;
+static int yy_lp;
+#define REJECT \
+{ \
+*yy_cp = yy_hold_char; /* undo effects of setting up yytext */ \
+yy_cp = yy_full_match; /* restore poss. backed-over text */ \
+++yy_lp; \
+goto find_rule; \
+}
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
@@ -402,11 +425,10 @@ char *yytext;
 #include <string.h>
 #include "y.tab.h"
 
-struct no* cria_folha_int(int valor);
-struct no* cria_folha_real(double valor);
-struct no* cria_folha_char(char valor);
-struct no* cria_folha_var(char* nome);
-#line 410 "lex.yy.c"
+struct No* cria_folha_num(double valor, int token_tipo);
+struct No* cria_folha_var(const char* nome);
+
+#line 432 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -557,10 +579,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 18 "au.l"
+#line 17 "au.l"
 
 
-#line 564 "lex.yy.c"
+#line 586 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -599,15 +621,12 @@ YY_DECL
 		yy_bp = yy_cp;
 
 		yy_current_state = yy_start;
+		yy_state_ptr = yy_state_buf;
+		*yy_state_ptr++ = yy_current_state;
 yy_match:
 		do
 			{
 			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
-			if ( yy_accept[yy_current_state] )
-				{
-				yy_last_accepting_state = yy_current_state;
-				yy_last_accepting_cpos = yy_cp;
-				}
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
@@ -615,212 +634,223 @@ yy_match:
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+			*yy_state_ptr++ = yy_current_state;
 			++yy_cp;
 			}
 		while ( yy_base[yy_current_state] != 76 );
 
 yy_find_action:
-		yy_act = yy_accept[yy_current_state];
-		if ( yy_act == 0 )
-			{ /* have to back up */
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			yy_act = yy_accept[yy_current_state];
+		yy_current_state = *--yy_state_ptr;
+		yy_lp = yy_accept[yy_current_state];
+find_rule: /* we branch to this label when backing up */
+		for ( ; ; ) /* until we find what rule we matched */
+			{
+			if ( yy_lp && yy_lp < yy_accept[yy_current_state + 1] )
+				{
+				yy_act = yy_acclist[yy_lp];
+					{
+					yy_full_match = yy_cp;
+					break;
+					}
+				}
+			--yy_cp;
+			yy_current_state = *--yy_state_ptr;
+			yy_lp = yy_accept[yy_current_state];
 			}
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					++yylineno;
+			}
 
 do_action:	/* This label is used only to access EOF actions. */
 
 
 		switch ( yy_act )
 	{ /* beginning of action switch */
-			case 0: /* must back up */
-			/* undo the effects of YY_DO_BEFORE_ACTION */
-			*yy_cp = yy_hold_char;
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			goto yy_find_action;
-
 case 1:
 YY_RULE_SETUP
-#line 20 "au.l"
-{ printf("BEGINPROGRAMA "); return BEGINPROGRAMA; }
+#line 19 "au.l"
+{ return BEGINPROGRAMA; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 21 "au.l"
-{ printf("ENDPROGRAMA "); return ENDPROGRAMA; }
+#line 20 "au.l"
+{ return ENDPROGRAMA; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 22 "au.l"
-{ printf("PONTOVIRGULA "); return PONTOVIRGULA; }
+#line 21 "au.l"
+{ return PONTOVIRGULA; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "au.l"
-{ printf("INICIOBLOCO "); return INICIOBLOCO; }
+#line 23 "au.l"
+{ return INICIOBLOCO; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "au.l"
-{ printf("FIMBLOCO "); return FIMBLOCO; }
+#line 24 "au.l"
+{ return FIMBLOCO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 26 "au.l"
-{ printf("DOISPONTOS "); return DOISPONTOS; }
+#line 25 "au.l"
+{ return DOISPONTOS; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "au.l"
-{ printf("REPETICAO "); return REPETICAO; }
+#line 27 "au.l"
+{ return REPETICAO; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "au.l"
-{ printf("SE "); return SE; }
+#line 28 "au.l"
+{ return SE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 30 "au.l"
-{ printf("SENAO "); return SENAO; }
+#line 29 "au.l"
+{ return SENAO; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 33 "au.l"
-{ printf("ENTRADA "); return ENTRADA; }
+#line 31 "au.l"
+{ return ENTRADA; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 34 "au.l"
-{ printf("SAIDA "); return SAIDA; }
+#line 32 "au.l"
+{ return SAIDA; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 36 "au.l"
-{ printf("ATRIBUICAO "); return ATRIBUICAO; }
+#line 34 "au.l"
+{ return ATRIBUICAO; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 38 "au.l"
-{ printf("TIPO_INT "); return TIPO_INT; }
+#line 36 "au.l"
+{ return TIPO_INT; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 39 "au.l"
-{ printf("TIPO_REAL "); return TIPO_REAL; }
+#line 37 "au.l"
+{ return TIPO_REAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "au.l"
-{ printf("TIPO_CHAR "); return TIPO_CHAR; }
+#line 38 "au.l"
+{ return TIPO_CHAR; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 42 "au.l"
-{ printf("IGUAL "); return IGUAL; }
+#line 40 "au.l"
+{ return IGUAL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 43 "au.l"
-{ printf("MENOR "); return MENOR; }
+#line 41 "au.l"
+{ return MENOR; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 44 "au.l"
-{ printf("MAIOR "); return MAIOR; }
+#line 42 "au.l"
+{ return MAIOR; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 45 "au.l"
-{ printf("MENOR_IGUAL "); return MENOR_IGUAL; }
+#line 43 "au.l"
+{ return MENOR_IGUAL; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 46 "au.l"
-{ printf("MAIOR_IGUAL "); return MAIOR_IGUAL; }
+#line 44 "au.l"
+{ return MAIOR_IGUAL; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "au.l"
-{ printf("SOMA "); return SOMA; }
+#line 46 "au.l"
+{ return SOMA; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 49 "au.l"
-{ printf("SUB "); return SUB; }
+#line 47 "au.l"
+{ return SUB; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 50 "au.l"
-{ printf("MULT "); return MULT; }
+#line 48 "au.l"
+{ return MULT; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 51 "au.l"
-{ printf("DIV "); return DIV; }
+#line 49 "au.l"
+{ return DIV; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 52 "au.l"
-{ printf("MOD "); return MOD; }
+#line 50 "au.l"
+{ return MOD; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 54 "au.l"
-{ printf("OU "); return OU; }
+#line 52 "au.l"
+{ return OU; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 55 "au.l"
-{ printf("NAO "); return NAO; }  
+#line 53 "au.l"
+{ return NAO; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 56 "au.l"
-{ printf("E "); return E; }
+#line 54 "au.l"
+{ return E; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 58 "au.l"
-{ yylval.no_ptr = cria_folha_int(atoi(yytext)); printf("INTEIRO "); return INTEIRO; }
+#line 56 "au.l"
+{ yylval.no_ptr = cria_folha_num(atof(yytext), INTEIRO); return INTEIRO; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 59 "au.l"
-{ yylval.no_ptr = cria_folha_real(atof(yytext)); printf("REAL "); return REAL; }
+#line 57 "au.l"
+{ yylval.no_ptr = cria_folha_num(atof(yytext), REAL); return REAL; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 60 "au.l"
-{ yylval.no_ptr = cria_folha_char(yytext[1]); printf("CARACTERE"); return CARACTERE; }
+#line 58 "au.l"
+{ yylval.no_ptr = cria_folha_num((double)yytext[1], CARACTERE); return CARACTERE; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 61 "au.l"
-{ yylval.no_ptr = cria_folha_var(strdup(yytext)); printf("VARIAVEL "); return VARIAVEL; }
+#line 59 "au.l"
+{ yylval.no_ptr = cria_folha_var(yytext); return VARIAVEL; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 63 "au.l"
+#line 61 "au.l"
 { /* ignorar espacos em branco */ }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 65 "au.l"
+#line 63 "au.l"
 { printf("Erro lexico: Caractere invalido '%s'\n", yytext); exit(1); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 67 "au.l"
+#line 65 "au.l"
 ECHO;
 	YY_BREAK
-#line 822 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 852 "lex.yy.c"
+			case YY_STATE_EOF(INITIAL):
+				yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1098,15 +1128,12 @@ static yy_state_type yy_get_previous_state()
 	register char *yy_cp;
 
 	yy_current_state = yy_start;
+	yy_state_ptr = yy_state_buf;
+	*yy_state_ptr++ = yy_current_state;
 
 	for ( yy_cp = yytext_ptr + YY_MORE_ADJ; yy_cp < yy_c_buf_p; ++yy_cp )
 		{
 		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
-		if ( yy_accept[yy_current_state] )
-			{
-			yy_last_accepting_state = yy_current_state;
-			yy_last_accepting_cpos = yy_cp;
-			}
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
@@ -1114,6 +1141,7 @@ static yy_state_type yy_get_previous_state()
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+		*yy_state_ptr++ = yy_current_state;
 		}
 
 	return yy_current_state;
@@ -1134,14 +1162,8 @@ yy_state_type yy_current_state;
 #endif
 	{
 	register int yy_is_jam;
-	register char *yy_cp = yy_c_buf_p;
 
 	register YY_CHAR yy_c = 1;
-	if ( yy_accept[yy_current_state] )
-		{
-		yy_last_accepting_state = yy_current_state;
-		yy_last_accepting_cpos = yy_cp;
-		}
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
@@ -1150,6 +1172,8 @@ yy_state_type yy_current_state;
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 67);
+	if ( ! yy_is_jam )
+		*yy_state_ptr++ = yy_current_state;
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1192,6 +1216,8 @@ register char *yy_bp;
 
 	*--yy_cp = (char) c;
 
+	if ( c == '\n' )
+		--yylineno;
 
 	yytext_ptr = yy_bp;
 	yy_hold_char = *yy_cp;
@@ -1268,6 +1294,8 @@ static int input()
 	*yy_c_buf_p = '\0';	/* preserve yytext */
 	yy_hold_char = *++yy_c_buf_p;
 
+	if ( c == '\n' )
+		++yylineno;
 
 	return c;
 	}
@@ -1704,4 +1732,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 67 "au.l"
+#line 65 "au.l"
