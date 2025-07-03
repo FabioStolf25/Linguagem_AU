@@ -4,8 +4,22 @@
 #include <string.h>
 #include "y.tab.h"
 
+FILE *token_log_file = NULL;
+
 struct No* cria_folha_num(double valor, int token_tipo);
 struct No* cria_folha_var(const char* nome);
+
+void log_token(const char* token_name) {
+    // Abre o arquivo na primeira chamada
+    if (token_log_file == NULL) {
+        token_log_file = fopen("tokens.txt", "w");
+        if (token_log_file == NULL) {
+            perror("Erro ao abrir tokens.txt");
+            exit(1);
+        }
+    }
+    fprintf(token_log_file, "%s => %s\n", yytext, token_name);
+}
 
 %}
 %option yylineno
@@ -16,47 +30,47 @@ letra       [a-zA-Z]
 
 %%
 
-"A"                 { return BEGINPROGRAMA; }
-"UU"                { return ENDPROGRAMA; }
-"AUU"               { return PONTOVIRGULA; }
+"A"                 { log_token("BEGINPROGRAMA"); return BEGINPROGRAMA; }
+"UU"                { log_token("ENDPROGRAMA"); return ENDPROGRAMA; }
+"AUU"               { log_token("PONTOVIRGULA"); return PONTOVIRGULA; }
 
-"Au"                { return INICIOBLOCO; }
-"AU"                { return FIMBLOCO; }
-"Auu"               { return DOISPONTOS; }
+"Au"                { log_token("INICIOBLOCO"); return INICIOBLOCO; }
+"AU"                { log_token("FIMBLOCO"); return FIMBLOCO; }
+"Auu"               { log_token("DOISPONTOS"); return DOISPONTOS; }
 
-"AUUAUU"            { return REPETICAO; }
-"AuuAUU"            { return SE; }
-"AUUAuu"            { return SENAO; }
+"AUUAUU"            { log_token("REPETICAO"); return REPETICAO; }
+"AuuAUU"            { log_token("SE"); return SE; }
+"AUUAuu"            { log_token("SENAO"); return SENAO; }
 
-"AuAuu"             { return ENTRADA; }
-"AUAuu"             { return SAIDA; }
+"AuAuu"             { log_token("ENTRADA"); return ENTRADA; }
+"AUAuu"             { log_token("SAIDA"); return SAIDA; }
 
-"Auuu"              { return ATRIBUICAO; }
+"Auuu"              { log_token("ATRIBUICAO"); return ATRIBUICAO; }
 
-"AuAu"              { return TIPO_INT; }
-"AuAU"              { return TIPO_REAL; }
-"AUAu"              { return TIPO_CHAR; }
+"AuAu"              { log_token("TIPO_INT"); return TIPO_INT; }
+"AuAU"              { log_token("TIPO_REAL"); return TIPO_REAL; }
+"AUAu"              { log_token("TIPO_CHAR"); return TIPO_CHAR; }
 
-"AuAuAu"            { return IGUAL; }
-"AuAuAU"            { return MENOR; }
-"AuAUAu"            { return MAIOR; }
-"AuAUAU"            { return MENOR_IGUAL; }
-"AUAuAu"            { return MAIOR_IGUAL; }
+"AuAuAu"            { log_token("IGUAL"); return IGUAL; }
+"AuAuAU"            { log_token("MENOR"); return MENOR; }
+"AuAUAu"            { log_token("MAIOR"); return MAIOR; }
+"AuAUAU"            { log_token("MENOR_IGUAL"); return MENOR_IGUAL; }
+"AUAuAu"            { log_token("MAIOR_IGUAL"); return MAIOR_IGUAL; }
 
-"AuuAuAu"           { return SOMA; }
-"AuuAuAU"           { return SUB; }
-"AuuAUAu"           { return MULT; }
-"AuuAUAU"           { return DIV; }
-"AuuAuuAu"          { return MOD; }
+"AuuAuAu"           { log_token("SOMA"); return SOMA; }
+"AuuAuAU"           { log_token("SUB"); return SUB; }
+"AuuAUAu"           { log_token("MULT"); return MULT; }
+"AuuAUAU"           { log_token("DIV"); return DIV; }
+"AuuAuuAu"          { log_token("MOD"); return MOD; }
 
-"AuUAUu"            { return OU; }
-"AuUAUU"            { return NAO; }
-"AUuAuU"            { return E; }
+"AuUAUu"            { log_token("OU"); return OU; }
+"AuUAUU"            { log_token("NAO"); return NAO; }
+"AUuAuU"            { log_token("E"); return E; }
 
-{digito}+           { yylval.no_ptr = cria_folha_num(atof(yytext), INTEIRO); return INTEIRO; }
-{digito}+\.{digito}+ { yylval.no_ptr = cria_folha_num(atof(yytext), REAL); return REAL; }
-\'({letra}|{digito})\' { yylval.no_ptr = cria_folha_num((double)yytext[1], CARACTERE); return CARACTERE; }
-{letra}({letra}|{digito})* { yylval.no_ptr = cria_folha_var(yytext); return VARIAVEL; }
+{digito}+           { log_token("INTEIRO"); yylval.no_ptr = cria_folha_num(atof(yytext), INTEIRO); return INTEIRO; }
+{digito}+\.{digito}+ { log_token("REAL"); yylval.no_ptr = cria_folha_num(atof(yytext), REAL); return REAL; }
+\'({letra}|{digito})\' { log_token("CARACTERE"); yylval.no_ptr = cria_folha_num((double)yytext[1], CARACTERE); return CARACTERE; }
+{letra}({letra}|{digito})* { log_token("VARIAVEL"); yylval.no_ptr = cria_folha_var(yytext); return VARIAVEL; }
 
 [ \t\n\r]+          { /* ignorar espacos em branco */ }
 

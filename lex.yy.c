@@ -425,10 +425,24 @@ char *yytext;
 #include <string.h>
 #include "y.tab.h"
 
+FILE *token_log_file = NULL;
+
 struct No* cria_folha_num(double valor, int token_tipo);
 struct No* cria_folha_var(const char* nome);
 
-#line 432 "lex.yy.c"
+void log_token(const char* token_name) {
+    // Abre o arquivo na primeira chamada
+    if (token_log_file == NULL) {
+        token_log_file = fopen("tokens.txt", "w");
+        if (token_log_file == NULL) {
+            perror("Erro ao abrir tokens.txt");
+            exit(1);
+        }
+    }
+    fprintf(token_log_file, "%s => %s\n", yytext, token_name);
+}
+
+#line 446 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -579,10 +593,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 17 "au.l"
+#line 31 "au.l"
 
 
-#line 586 "lex.yy.c"
+#line 600 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -675,180 +689,180 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 19 "au.l"
-{ return BEGINPROGRAMA; }
+#line 33 "au.l"
+{ log_token("BEGINPROGRAMA"); return BEGINPROGRAMA; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 20 "au.l"
-{ return ENDPROGRAMA; }
+#line 34 "au.l"
+{ log_token("ENDPROGRAMA"); return ENDPROGRAMA; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 21 "au.l"
-{ return PONTOVIRGULA; }
+#line 35 "au.l"
+{ log_token("PONTOVIRGULA"); return PONTOVIRGULA; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "au.l"
-{ return INICIOBLOCO; }
+#line 37 "au.l"
+{ log_token("INICIOBLOCO"); return INICIOBLOCO; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 24 "au.l"
-{ return FIMBLOCO; }
+#line 38 "au.l"
+{ log_token("FIMBLOCO"); return FIMBLOCO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "au.l"
-{ return DOISPONTOS; }
+#line 39 "au.l"
+{ log_token("DOISPONTOS"); return DOISPONTOS; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 27 "au.l"
-{ return REPETICAO; }
+#line 41 "au.l"
+{ log_token("REPETICAO"); return REPETICAO; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 28 "au.l"
-{ return SE; }
+#line 42 "au.l"
+{ log_token("SE"); return SE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 29 "au.l"
-{ return SENAO; }
+#line 43 "au.l"
+{ log_token("SENAO"); return SENAO; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 31 "au.l"
-{ return ENTRADA; }
+#line 45 "au.l"
+{ log_token("ENTRADA"); return ENTRADA; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 32 "au.l"
-{ return SAIDA; }
+#line 46 "au.l"
+{ log_token("SAIDA"); return SAIDA; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 34 "au.l"
-{ return ATRIBUICAO; }
+#line 48 "au.l"
+{ log_token("ATRIBUICAO"); return ATRIBUICAO; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 36 "au.l"
-{ return TIPO_INT; }
+#line 50 "au.l"
+{ log_token("TIPO_INT"); return TIPO_INT; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 37 "au.l"
-{ return TIPO_REAL; }
+#line 51 "au.l"
+{ log_token("TIPO_REAL"); return TIPO_REAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 38 "au.l"
-{ return TIPO_CHAR; }
+#line 52 "au.l"
+{ log_token("TIPO_CHAR"); return TIPO_CHAR; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 40 "au.l"
-{ return IGUAL; }
+#line 54 "au.l"
+{ log_token("IGUAL"); return IGUAL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 41 "au.l"
-{ return MENOR; }
+#line 55 "au.l"
+{ log_token("MENOR"); return MENOR; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 42 "au.l"
-{ return MAIOR; }
+#line 56 "au.l"
+{ log_token("MAIOR"); return MAIOR; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 43 "au.l"
-{ return MENOR_IGUAL; }
+#line 57 "au.l"
+{ log_token("MENOR_IGUAL"); return MENOR_IGUAL; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 44 "au.l"
-{ return MAIOR_IGUAL; }
+#line 58 "au.l"
+{ log_token("MAIOR_IGUAL"); return MAIOR_IGUAL; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 46 "au.l"
-{ return SOMA; }
+#line 60 "au.l"
+{ log_token("SOMA"); return SOMA; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 47 "au.l"
-{ return SUB; }
+#line 61 "au.l"
+{ log_token("SUB"); return SUB; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 48 "au.l"
-{ return MULT; }
+#line 62 "au.l"
+{ log_token("MULT"); return MULT; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 49 "au.l"
-{ return DIV; }
+#line 63 "au.l"
+{ log_token("DIV"); return DIV; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 50 "au.l"
-{ return MOD; }
+#line 64 "au.l"
+{ log_token("MOD"); return MOD; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 52 "au.l"
-{ return OU; }
+#line 66 "au.l"
+{ log_token("OU"); return OU; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 53 "au.l"
-{ return NAO; }
+#line 67 "au.l"
+{ log_token("NAO"); return NAO; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 54 "au.l"
-{ return E; }
+#line 68 "au.l"
+{ log_token("E"); return E; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 56 "au.l"
-{ yylval.no_ptr = cria_folha_num(atof(yytext), INTEIRO); return INTEIRO; }
+#line 70 "au.l"
+{ log_token("INTEIRO"); yylval.no_ptr = cria_folha_num(atof(yytext), INTEIRO); return INTEIRO; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 57 "au.l"
-{ yylval.no_ptr = cria_folha_num(atof(yytext), REAL); return REAL; }
+#line 71 "au.l"
+{ log_token("REAL"); yylval.no_ptr = cria_folha_num(atof(yytext), REAL); return REAL; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 58 "au.l"
-{ yylval.no_ptr = cria_folha_num((double)yytext[1], CARACTERE); return CARACTERE; }
+#line 72 "au.l"
+{ log_token("CARACTERE"); yylval.no_ptr = cria_folha_num((double)yytext[1], CARACTERE); return CARACTERE; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 59 "au.l"
-{ yylval.no_ptr = cria_folha_var(yytext); return VARIAVEL; }
+#line 73 "au.l"
+{ log_token("VARIAVEL"); yylval.no_ptr = cria_folha_var(yytext); return VARIAVEL; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 61 "au.l"
+#line 75 "au.l"
 { /* ignorar espacos em branco */ }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 63 "au.l"
+#line 77 "au.l"
 { printf("Erro lexico: Caractere invalido '%s'\n", yytext); exit(1); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 65 "au.l"
+#line 79 "au.l"
 ECHO;
 	YY_BREAK
-#line 852 "lex.yy.c"
+#line 866 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1732,4 +1746,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 65 "au.l"
+#line 79 "au.l"
