@@ -431,7 +431,7 @@ struct No* cria_folha_num(double valor, int token_tipo);
 struct No* cria_folha_var(const char* nome);
 
 void log_token(const char* token_name) {
-    // Abre o arquivo na primeira chamada
+
     if (token_log_file == NULL) {
         token_log_file = fopen("tokens.txt", "w");
         if (token_log_file == NULL) {

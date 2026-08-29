@@ -117,7 +117,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 41 "au.y"
+#line 40 "au.y"
 
     struct No* no_ptr;
 

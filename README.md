@@ -19,7 +19,7 @@ Projeto final da matéria Compiladores. Desenvolvimento da Linguagem AU utilizan
     ```bash
     flex au.l
     bison -d au.y
-    gcc -o au_compiler au.tab.c lex.yy.c -lfl
+    gcc -o au_compiler y.tab.c lex.yy.c -lfl
     ```
 
 4. **Execute o compilador**

@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 2 "au.y"
+#line 1 "au.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -214,7 +214,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 41 "au.y"
+#line 40 "au.y"
 
     struct No* no_ptr;
 
@@ -535,11 +535,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    68,    68,    69,    72,    73,    76,    77,    78,    79,
-      80,    81,    84,    87,    88,    89,    92,    95,    96,    99,
-     101,   105,   108,   109,   110,   111,   112,   113,   114,   115,
-     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
-     126
+       0,    67,    67,    68,    71,    72,    75,    76,    77,    78,
+      79,    80,    83,    86,    87,    88,    91,    94,    95,    98,
+     100,   104,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125
 };
 #endif
 
@@ -1510,273 +1510,273 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 68 "au.y"
+#line 67 "au.y"
     { raiz = (yyvsp[(2) - (3)].no_ptr); }
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 69 "au.y"
+#line 68 "au.y"
     { raiz = NULL; }
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 72 "au.y"
+#line 71 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 73 "au.y"
+#line 72 "au.y"
     { (yyvsp[(1) - (2)].no_ptr)->prox = (yyvsp[(2) - (2)].no_ptr); (yyval.no_ptr) = (yyvsp[(1) - (2)].no_ptr); }
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 76 "au.y"
+#line 75 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (2)].no_ptr); }
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 77 "au.y"
+#line 76 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (2)].no_ptr); }
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 78 "au.y"
+#line 77 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 79 "au.y"
+#line 78 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 80 "au.y"
+#line 79 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (2)].no_ptr); }
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 81 "au.y"
+#line 80 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 84 "au.y"
+#line 83 "au.y"
     { (yyval.no_ptr) = (yyvsp[(2) - (3)].no_ptr); }
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 87 "au.y"
+#line 86 "au.y"
     { (yyval.no_ptr) = cria_no_op(TIPO_INT, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 88 "au.y"
+#line 87 "au.y"
     { (yyval.no_ptr) = cria_no_op(TIPO_REAL, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 89 "au.y"
+#line 88 "au.y"
     { (yyval.no_ptr) = cria_no_op(TIPO_CHAR, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 92 "au.y"
+#line 91 "au.y"
     { (yyval.no_ptr) = cria_no_op(ATRIBUICAO, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 95 "au.y"
+#line 94 "au.y"
     { (yyval.no_ptr) = cria_no_op(SAIDA, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 96 "au.y"
+#line 95 "au.y"
     { (yyval.no_ptr) = cria_no_op(ENTRADA, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 100 "au.y"
+#line 99 "au.y"
     { (yyval.no_ptr) = cria_no_op(SE, (yyvsp[(2) - (4)].no_ptr), (yyvsp[(4) - (4)].no_ptr)); }
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 102 "au.y"
+#line 101 "au.y"
     { (yyvsp[(4) - (6)].no_ptr)->prox = (yyvsp[(6) - (6)].no_ptr); (yyval.no_ptr) = cria_no_op(SE, (yyvsp[(2) - (6)].no_ptr), (yyvsp[(4) - (6)].no_ptr)); }
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 105 "au.y"
+#line 104 "au.y"
     { (yyval.no_ptr) = cria_no_op(REPETICAO, (yyvsp[(2) - (4)].no_ptr), (yyvsp[(4) - (4)].no_ptr)); }
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 108 "au.y"
+#line 107 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 109 "au.y"
+#line 108 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 110 "au.y"
+#line 109 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 111 "au.y"
+#line 110 "au.y"
     { (yyval.no_ptr) = (yyvsp[(1) - (1)].no_ptr); }
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 112 "au.y"
+#line 111 "au.y"
     { (yyval.no_ptr) = cria_no_op(SOMA, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 113 "au.y"
+#line 112 "au.y"
     { (yyval.no_ptr) = cria_no_op(SUB, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 114 "au.y"
+#line 113 "au.y"
     { (yyval.no_ptr) = cria_no_op(MULT, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 115 "au.y"
+#line 114 "au.y"
     { (yyval.no_ptr) = cria_no_op(DIV, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 116 "au.y"
+#line 115 "au.y"
     { (yyval.no_ptr) = cria_no_op(MOD, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 117 "au.y"
+#line 116 "au.y"
     { (yyval.no_ptr) = cria_no_op(IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 118 "au.y"
+#line 117 "au.y"
     { (yyval.no_ptr) = cria_no_op(MENOR, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 119 "au.y"
+#line 118 "au.y"
     { (yyval.no_ptr) = cria_no_op(MAIOR, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 120 "au.y"
+#line 119 "au.y"
     { (yyval.no_ptr) = cria_no_op(MENOR_IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 121 "au.y"
+#line 120 "au.y"
     { (yyval.no_ptr) = cria_no_op(MAIOR_IGUAL, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 122 "au.y"
+#line 121 "au.y"
     { (yyval.no_ptr) = cria_no_op(E, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 123 "au.y"
+#line 122 "au.y"
     { (yyval.no_ptr) = cria_no_op(OU, (yyvsp[(1) - (3)].no_ptr), (yyvsp[(3) - (3)].no_ptr)); }
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 124 "au.y"
+#line 123 "au.y"
     { (yyval.no_ptr) = cria_no_op(NAO, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 125 "au.y"
+#line 124 "au.y"
     { (yyval.no_ptr) = cria_no_op(UNEGATIVO, (yyvsp[(2) - (2)].no_ptr), NULL); }
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 126 "au.y"
+#line 125 "au.y"
     { (yyval.no_ptr) = (yyvsp[(2) - (3)].no_ptr); }
     break;
 
@@ -1995,11 +1995,10 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 128 "au.y"
+#line 127 "au.y"
 
 
 void yyerror(const char *s) {
-    // Adicionado yylineno para dar mais detalhes do erro
     fprintf(stderr, "Erro na linha %d: %s\n", yylineno, s);
 }
 
@@ -2098,12 +2097,10 @@ void executa_arvore(struct No* n) {
                     case CARACTERE: {
                         char val_char = 0;
                         scanf(" %c", &val_char);
-                        (char)s->valor = val_char;
+                        s->valor = (char)val_char;
                         break;
                     }
                     case VARIAVEL: {
-                        // Tenta inferir o tipo pelo valor atual (se já foi atribuído)
-                        // Por padrão, lê como double
                         double val = 0;
                         scanf("%lf", &val);
                         s->valor = val;
@@ -2170,11 +2167,13 @@ void insere_simbolo(const char* nome) {
         char msg[256];
         sprintf(msg, "Variavel '%s' ja declarada.", nome);
         yyerror(msg);
-        return; // Apenas retorna, não encerra o programa
+        return;
     }
     struct Simbolo* s = (struct Simbolo*) malloc(sizeof(struct Simbolo));
-    strncpy(s->nome, nome, 255); s->nome[255] = '\0';
-    s->valor = 0; s->proximo = tabela_simbolos;
+    strncpy(s->nome, nome, 255);
+    s->nome[255] = '\0';
+    s->valor = 0;
+    s->proximo = tabela_simbolos;
     tabela_simbolos = s;
 }
 

@@ -1,14 +1,14 @@
 A
-
     AuAu t1 AUU
     AuAu t2 AUU
     AuAu proximotermo AUU
+
     AuAu contador AUU
     AuAu limite AUU
 
     t1 Auuu 0 AUU
     t2 Auuu 1 AUU
-    limite Auuu 10 AUU
+    limite Auuu 15 AUU
     contador Auuu 1 AUU
 
     AUUAUU contador AuAUAU limite Auu
