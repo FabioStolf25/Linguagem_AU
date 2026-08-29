@@ -1,6 +1,6 @@
-# ECOM06A_Auauau
+# Linguagem de Programação AU
 
-Projeto final da matéria de Compiladores. Implementação da linguagem esotérica **AU**, cujo alfabeto de tokens é formado apenas pelas letras `A` e `u` (uma brincadeira com "au au", o latido do cachorro). O projeto inclui o analisador léxico (Flex), o analisador sintático (Bison) e um interpretador que executa o programa diretamente a partir da árvore sintática gerada, sem passar por geração de código intermediário.
+Projeto final da matéria de Compiladores. Implementação da linguagem esotérica **AU**, cujo alfabeto de tokens é formado apenas pelas letras `A` e `u` ("au au", o latido do cachorro). O projeto inclui o analisador léxico (Flex), o analisador sintático (Bison) e um interpretador que executa o programa diretamente a partir da árvore sintática gerada, sem passar por geração de código intermediário.
 
 ## O que a linguagem AU suporta
 
