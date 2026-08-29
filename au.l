@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "y.tab.h"
+#include "au.tab.h"
 
 FILE *token_log_file = NULL;
 

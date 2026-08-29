@@ -1,0 +1,11 @@
+# Arquivos gerados pelo Flex/Bison/GCC (veja Makefile)
+au_compiler
+au_compiler.exe
+lex.yy.c
+au.tab.c
+au.tab.h
+y.tab.c
+y.tab.h
+
+# Log de tokens gerado em tempo de execucao
+tokens.txt

@@ -20,7 +20,12 @@ struct No *raiz = NULL;
 
 struct Simbolo {
     char nome[256];
-    double valor;
+    int tipo;
+    union {
+        int v_int;
+        double v_real;
+        char v_char;
+    } valor;
     struct Simbolo* proximo;
 };
 
@@ -170,7 +175,12 @@ void executa_arvore(struct No* n) {
         if(!cmd) continue;
         switch(cmd->token) {
             case TIPO_INT: case TIPO_REAL: case TIPO_CHAR:
-                insere_simbolo(cmd->esq->nome); break;
+                insere_simbolo(cmd->esq->nome);
+                {
+                    struct Simbolo* declarado = busca_simbolo(cmd->esq->nome);
+                    if (declarado) declarado->tipo = cmd->token;
+                }
+                break;
             case ATRIBUICAO:
                 atualiza_simbolo(cmd->esq->nome, avalia_exp(cmd->dir)); break;
             case SAIDA: {
@@ -182,21 +192,26 @@ void executa_arvore(struct No* n) {
                 } else {
                     printf("Saida: ");
                 }
-                switch(cmd->esq->token) {
+
+                double valor = avalia_exp(cmd->esq);
+                switch (s ? s->tipo : cmd->esq->token) {
                     case INTEIRO:
-                        printf("%d\n", (int)avalia_exp(cmd->esq));
+                    case TIPO_INT:
+                        printf("%d\n", (int)valor);
                         break;
                     case REAL:
-                        printf("%g\n", avalia_exp(cmd->esq));
+                    case TIPO_REAL:
+                        printf("%g\n", valor);
                         break;
                     case CARACTERE:
-                        printf("%c\n", (char)avalia_exp(cmd->esq));
+                    case TIPO_CHAR:
+                        printf("%c\n", (unsigned char)valor);
                         break;
                     case VARIAVEL:
-                        printf("%g\n", avalia_exp(cmd->esq));
+                        printf("%g\n", valor);
                         break;
                     default:
-                        printf("%g\n", avalia_exp(cmd->esq));
+                        printf("%g\n", valor);
                         break;
                 }
                 break;
@@ -209,35 +224,21 @@ void executa_arvore(struct No* n) {
                 }
                 printf("Entrada para %s: ", cmd->esq->nome);
 
-                switch(cmd->esq->token) {
-                    case INTEIRO: {
-                        int val_int = 0;
-                        scanf("%d", &val_int);
-                        s->valor = val_int;
+                switch (s->tipo) {
+                    case TIPO_INT: {
+                        scanf("%d", &s->valor.v_int);
                         break;
                     }
-                    case REAL: {
-                        double val_real = 0;
-                        scanf("%lf", &val_real);
-                        s->valor = val_real;
+                    case TIPO_REAL: {
+                        scanf("%lf", &s->valor.v_real);
                         break;
                     }
-                    case CARACTERE: {
-                        char val_char = 0;
-                        scanf(" %c", &val_char);
-                        s->valor = (char)val_char;
-                        break;
-                    }
-                    case VARIAVEL: {
-                        double val = 0;
-                        scanf("%lf", &val);
-                        s->valor = val;
+                    case TIPO_CHAR: {
+                        scanf(" %c", &s->valor.v_char);
                         break;
                     }
                     default: {
-                        double val = 0;
-                        scanf("%lf", &val);
-                        s->valor = val;
+                        scanf("%lf", &s->valor.v_real);
                         break;
                     }
                 }
@@ -270,7 +271,9 @@ double avalia_exp(struct No* n) {
                 yyerror(msg);
                 exit(1);
             }
-            return s->valor;
+            if (s->tipo == TIPO_INT) return (double)s->valor.v_int;
+            if (s->tipo == TIPO_CHAR) return (double)s->valor.v_char;
+            return s->valor.v_real;
         }
         case SOMA:      return avalia_exp(n->esq) + avalia_exp(n->dir);
         case SUB:       return avalia_exp(n->esq) - avalia_exp(n->dir);
@@ -300,7 +303,8 @@ void insere_simbolo(const char* nome) {
     struct Simbolo* s = (struct Simbolo*) malloc(sizeof(struct Simbolo));
     strncpy(s->nome, nome, 255);
     s->nome[255] = '\0';
-    s->valor = 0;
+    s->valor.v_real = 0; // Inicializa a union inteira em 0
+    s->tipo = 0;
     s->proximo = tabela_simbolos;
     tabela_simbolos = s;
 }
@@ -322,5 +326,11 @@ void atualiza_simbolo(const char* nome, double valor) {
         yyerror(msg);
         exit(1);
     }
-    s->valor = valor;
+    if (s->tipo == TIPO_INT) {
+        s->valor.v_int = (int)valor;
+    } else if (s->tipo == TIPO_CHAR) {
+        s->valor.v_char = (char)valor;
+    } else {
+        s->valor.v_real = valor;
+    }
 }
