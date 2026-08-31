@@ -25,7 +25,7 @@ Como todos os tokens são combinações de `A` e `u`, o mapeamento completo de c
 1. **Clone o repositório**
     ```bash
     git clone <URL-do-repositório>
-    cd ECOM06A_Auauau
+    cd Linguagem_AU
     ```
 
 2. **Compile**
